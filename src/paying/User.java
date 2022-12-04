@@ -5,6 +5,9 @@ public class User {
        private String pass;
        private String email;
        private wallet userwallet;
+       
+       
+       
 	public String getUname() {
 		return uname;
 	}
@@ -29,7 +32,20 @@ public class User {
 	public void setUserwallet(wallet userwallet) {
 		this.userwallet = userwallet;
 	}
+	public User(String uname, String pass, String email) {
+		
+		this.uname = uname;
+		this.pass = pass;
+		this.email = email;
+	}
        
+	public void showuserdata() {
+		
+		System.out.println(this.uname);
+		System.out.println(this.email);
+		System.out.println(this.pass);
+	}
+	
        
        
 }

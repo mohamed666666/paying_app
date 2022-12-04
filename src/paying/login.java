@@ -20,6 +20,30 @@ public class login {
 	}
 	
 	
+	public void loginguser(String uname,String pass,database data) {
+		   User u=data.search(uname);
+		   if(u!=null) {
+			   if (u.getPass().equals(pass)) {
+				   this.Currentuser=u;
+				   System.out.println("Successfully logedin");
+			   }
+			   else {
+				   System.out.println(" password incorrect");
+			   }
+		   }
+		   else {
+			   System.out.println("this user does not exist please register first");
+		   }
+		   
+	}
+	
+	public void logout() {
+		log=null;
+		System.gc();
+		
+	}
+	
+	
 	
 
 }
