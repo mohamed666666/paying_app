@@ -3,6 +3,12 @@ package paying;
 public class wallet {
 	private String id;
 	double balance;
+	
+	
+	public wallet(String id, double balance) {
+		this.id = id;
+		this.balance = balance;
+	}
 	public String getId() {
 		return id;
 	}
@@ -18,4 +24,8 @@ public class wallet {
 	public void edit(double newbalance) {
 		this.setBalance(newbalance);
 	}
+	/*
+	public void show() {
+		System.out.println("wallet id :"+this.id);
+	}*/
 }

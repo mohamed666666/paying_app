@@ -20,19 +20,22 @@ public class login {
 	}
 	
 	
-	public void loginguser(String uname,String pass,database data) {
-		   User u=data.search(uname);
+	public int loginguser(String em,String pass,database data) {
+		   User u=data.searchForUser(em);
 		   if(u!=null) {
 			   if (u.getPass().equals(pass)) {
 				   this.Currentuser=u;
 				   System.out.println("Successfully logedin");
+				   return 0;
 			   }
 			   else {
 				   System.out.println(" password incorrect");
+				   return 1;
 			   }
 		   }
-		   else {
+		   else {   
 			   System.out.println("this user does not exist please register first");
+			   return 2;
 		   }
 		   
 	}
@@ -42,8 +45,14 @@ public class login {
 		System.gc();
 		
 	}
+
+
+	public User getCurrentuser() {
+		return Currentuser;
+	}
+
+
 	
-	
-	
+
 
 }
