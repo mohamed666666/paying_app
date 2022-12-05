@@ -56,31 +56,44 @@ public class main {
 				loging.loginguser(inputs.get(0), inputs.get(1), data);
 
 				char choice = ScreenService().charAt(0);
-
 				serviceFactory servicefact = new serviceFactory();
 
 				Iservice service = servicefact.chooseservice(choice);
+				
+				
+				if ( choice =='a' || choice =='b') {
+					
 
-				String chosprovider = Screenprovider();
+					String chosprovider = Screenprovider();
 
-				if (chosprovider.equals("i")) {
+					if (chosprovider.equals("i")) {
 
-					paying(service, voda, loging, data);
+						paying(service, voda, loging, data);
+					}
+
+					if (chosprovider.equals("ii")) {
+						paying(service, ets, loging, data);
+
+					}
+
+					if (chosprovider.equals("iii")) {
+						paying(service, orange, loging, data);
+
+					}
+					if (chosprovider.equals("iiii")) {
+						paying(service, we, loging, data);
+
+					}
+					
 				}
-
-				if (chosprovider.equals("ii")) {
-					paying(service, ets, loging, data);
-
-				}
-
-				if (chosprovider.equals("iii")) {
-					paying(service, orange, loging, data);
-
-				}
-				if (chosprovider.equals("iiii")) {
+				else if (choice =='c') {
+					System.out.println("enter the landline kind " );
 					paying(service, we, loging, data);
-
+					
 				}
+				
+				
+				
 
 			}
 			if (a == 2) {
@@ -103,31 +116,42 @@ public class main {
 					// data.showuserdataByEmail(em);
 
 					char choice = ScreenService().charAt(0);
-
 					serviceFactory servicefact = new serviceFactory();
 
 					Iservice service = servicefact.chooseservice(choice);
+					
+					if ( choice =='a' || choice =='b') {
+						
 
-					String chosprovider = Screenprovider();
+						String chosprovider = Screenprovider();
 
-					if (chosprovider.equals("i")) {
+						if (chosprovider.equals("i")) {
 
-						paying(service, voda, loging, data);
+							paying(service, voda, loging, data);
+						}
+
+						if (chosprovider.equals("ii")) {
+							paying(service, ets, loging, data);
+
+						}
+
+						if (chosprovider.equals("iii")) {
+							paying(service, orange, loging, data);
+
+						}
+						if (chosprovider.equals("iiii")) {
+							paying(service, we, loging, data);
+
+						}
+						
 					}
-
-					if (chosprovider.equals("ii")) {
-						paying(service, ets, loging, data);
-
-					}
-
-					if (chosprovider.equals("iii")) {
-						paying(service, orange, loging, data);
-
-					}
-					if (chosprovider.equals("iiii")) {
+					else if (choice =='c') {
+						System.out.println("enter the landline kind " );
 						paying(service, we, loging, data);
-
+						
 					}
+					
+
 
 				}
 

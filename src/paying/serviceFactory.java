@@ -6,10 +6,14 @@ public class serviceFactory implements IserviceFactory  {
 	public Iservice chooseservice(char selector) {
 		
 		if (selector=='a') {
-			return new internetpay();
+			return new recharge();
 		}
 		if(selector=='b') {
-			return new recharge();
+			return new internetpay();
+		}
+		
+		if (selector=='c') {
+			return new Landlin();
 		}
 		
 		return null;
