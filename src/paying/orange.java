@@ -1,13 +1,12 @@
 package paying;
 
-public class orange extends company implements internetpayment{
+public class orange extends company{
 
 	public orange(String compid, account compaccount) {
 		super(compid, compaccount);
 		// TODO Auto-generated constructor stub
 	}
 
-	@Override
 	public void payinternet( double mount) {
 		// TODO Auto-generated method stub
 		double currentbalance=this.getCompaccount().getAccbalance();

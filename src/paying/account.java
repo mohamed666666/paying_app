@@ -29,5 +29,9 @@ public class account {
 	public void setAccbalance(double accbalance) {
 		this.accbalance = accbalance;
 	}
+	
+	public void add(double m) {
+		this.accbalance+=m;
+	}
 
 }

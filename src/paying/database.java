@@ -11,6 +11,8 @@ public class database {
 	ArrayList<company> companys=new ArrayList<company>();
 	
 	ArrayList<account> accounts=new ArrayList<account>();
+	
+	ArrayList<transaction> transactions=new ArrayList<transaction>();
 
 	
 	public int addUser(User u) {
@@ -124,6 +126,11 @@ public account searchForAcc(String accid) {
 		return 0;
     	}
    
+   
+   public void addtansaction(transaction t) {
+	   
+	   transactions.add(t);
+   }
 	
 	
 	

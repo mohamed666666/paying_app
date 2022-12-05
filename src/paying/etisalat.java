@@ -1,6 +1,6 @@
 package paying;
 
-public class etisalat extends company implements internetpayment{
+public class etisalat extends company {
 
 	
 	
@@ -17,7 +17,7 @@ public class etisalat extends company implements internetpayment{
 		// TODO Auto-generated constructor stub
 	}
 
-	@Override
+	
 	public void payinternet( double mount) {
 		// TODO Auto-generated method stub
 		double currentbalance=this.getCompaccount().getAccbalance();

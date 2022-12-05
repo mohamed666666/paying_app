@@ -1,6 +1,6 @@
 package paying;
 
-public class we extends company implements internetpayment{
+public class we extends company {
 
 	
 	public we() {}
@@ -10,7 +10,6 @@ public class we extends company implements internetpayment{
 		// TODO Auto-generated constructor stub
 	}
 
-	@Override
 	public void payinternet(double mount) {
 		// TODO Auto-generated method stub
 		double currentbalance=this.getCompaccount().getAccbalance();

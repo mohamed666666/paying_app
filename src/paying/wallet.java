@@ -21,7 +21,7 @@ public class wallet {
 	public void setBalance(double balance) {
 		this.balance = balance;
 	}
-	public void edit(double newbalance) {
+	public void editBalance(double newbalance) {
 		this.setBalance(newbalance);
 	}
 	/*

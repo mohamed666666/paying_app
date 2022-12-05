@@ -7,6 +7,13 @@ public class transaction {
 	private String transId;
 	
 	
+	public transaction(company comp, User user, double fee) {
+		
+		this.comp = comp;
+		this.user = user;
+		this.fee = fee;
+		this.transId = comp.getCompid() + user.getEmail();
+	}
 	public company getComp() {
 		return comp;
 	}
@@ -28,12 +35,18 @@ public class transaction {
 	public String getTransId() {
 		return transId;
 	}
-	public void setTransId(String transId) {
-		this.transId = transId;
+	
+	
+	
+	public void transact() {
+		
+		double current_user_balance=user.getUserwallet().getBalance();
+		user.getUserwallet().editBalance( current_user_balance- this.fee);
+		comp.getCompaccount().add(this.fee);
+		
+		
+		
 	}
-	
-	
-	
 	
 	
 	
