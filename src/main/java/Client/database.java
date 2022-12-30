@@ -1,6 +1,10 @@
-package paying;
+package Client;
 
 import java.util.ArrayList;
+
+import companies.account;
+import companies.company;
+import paying.transaction;
 
 public class database {
 	
@@ -38,7 +42,7 @@ public class database {
 	}
 	
 	
-	
+	/*
 	
 	public void showuserdataByEmail(String email) {
 		for(User u:this.Users) {
@@ -49,7 +53,7 @@ public class database {
 			
 		}
 		
-	}
+	}*/
 	
 	
 	public wallet searchForWallet(String wid) {
@@ -127,6 +131,31 @@ public account searchForAcc(String accid) {
 	   
 	   transactions.add(t);
    }
+
+
+public ArrayList<transaction> getTransactions() {
+	return transactions;
+}
+
+
+public void setTransactions(ArrayList<transaction> transactions) {
+	this.transactions = transactions;
+}
+   
+
+public transaction getTransactionById(String Tid) {
+	for (transaction t:this.transactions) {
+		
+		if ((t.getTransId()).equals(Tid)) {
+			return t;
+		}
+	
+	}
+	return null;
+	
+	
+}
+   
 	
 	
 	

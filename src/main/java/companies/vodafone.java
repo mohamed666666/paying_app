@@ -1,22 +1,17 @@
-package paying;
+package companies;
 
-public class etisalat extends company {
-	
-	
-	public etisalat() {
-		
-	}
-	
-	
-	
-	
-	public etisalat(String compid, account compaccount) {
+public class vodafone extends company {
+
+	public vodafone(String compid, account compaccount) {
 		super(compid, compaccount);
 		// TODO Auto-generated constructor stub
 	}
-
+	public vodafone() {
+		
+		
+	}
 	
-	public void payinternet( double mount) {
+	public void payinternet(double mount) {
 		// TODO Auto-generated method stub
 		double currentbalance=this.getCompaccount().getAccbalance();
 		this.getCompaccount().setAccbalance(currentbalance+mount);
@@ -24,4 +19,3 @@ public class etisalat extends company {
 	}
 
 }
-

@@ -1,4 +1,4 @@
-package paying;
+package Client;
 
 public class login {
 	private User Currentuser;

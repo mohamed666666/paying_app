@@ -1,5 +1,8 @@
 package paying;
 
+import Client.User;
+import companies.company;
+
 public class transaction {
 	private company comp;
 	private User user;

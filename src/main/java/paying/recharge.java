@@ -1,6 +1,9 @@
 package paying;
 
 public class recharge implements Iservice {
+	private String name="Recharge";
+	
+	
 
 	@Override
 	public void paying(transaction t) {
@@ -9,4 +12,8 @@ public class recharge implements Iservice {
 		System.out.println("recharging done ");
 	}
  
+	@Override
+	public String toString() {
+		return  name  ;
+	}
 }

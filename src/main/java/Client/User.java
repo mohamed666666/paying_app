@@ -1,4 +1,4 @@
-package paying;
+package Client;
 
 public class User {
        private String uname;

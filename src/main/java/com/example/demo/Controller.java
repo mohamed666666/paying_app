@@ -3,8 +3,11 @@ package com.example.demo;
 
 
 
+import java.util.ArrayList;
+
 import org.apache.catalina.User;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,16 +16,19 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.Response;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
-import paying.account;
-import paying.company;
-import paying.database;
-import paying.etisalat;
-import paying.login;
-import paying.orange;
-import paying.register;
-import paying.vodafone;
-import paying.wallet;
-import paying.we;
+import Client.database;
+import Client.login;
+import Client.register;
+import Client.wallet;
+import companies.account;
+import companies.company;
+import companies.etisalat;
+import companies.orange;
+import companies.vodafone;
+import companies.we;
+import paying.Iservice;
+import paying.serviceFactory;
+import paying.transaction;
 
 
 @RestController
@@ -38,6 +44,10 @@ public class Controller {
 	company voda ;
 	company orange;
 	company we;
+	serviceFactory servicefact = new serviceFactory();
+	Iservice service=null;
+	
+	
 	
 	Controller() {
 		 account etsacc = new account("011ac", 14520);
@@ -136,12 +146,110 @@ public class Controller {
 	@GetMapping("/services") 
 	public String Services() {
 		
-		return "a. Mobile recharge services.\n" + "b. Internet Payment services.\n" + "c. Landline services\n"; 
+		return "a. Mobile recharge services.\n"
+				+"i. Vodafone\n" + "ii.Etisalat\n" + "iii. Orange\n"
+		+ "b. Internet Payment services.\n"+
+		"i. Vodafone\n" + "ii.Etisalat\n" + "iii. Orange\n"
+				+ "c. Landline services\n"+
+				"i. Monthly\n" + "ii.3Months\n" ; 
+	}
+	
+	@PostMapping("/service/{s}/company/{c}") 
+	public Response ServiceCompany(@PathVariable("s")char s,@PathVariable("c")String c,@RequestBody ObjectNode objectNode) {
+		 service = servicefact.chooseservice(s);
+		 Response response = new Response();
+		 double fee = objectNode.get("fee").asDouble();
+		 
+		 if (service!=null) {
+			 
+			 if (c.equals("i")) {
+				 paying(fee,service, voda, loging, data);
+        	 
+				 response.setStatus(true);
+				 response.setMessage("You have payed to Vodafone");
+				 return response;
+         }
+        
+         
+         if (c.equals("ii")) {
+        	 paying(fee,service, ets, loging, data);
+        	 
+        	 response.setStatus(true);
+        	 response.setMessage("You have payed to Etisalat");
+        	 return response;
+         }
+         
+         else if (c.equals("iii")) {
+        	 paying(fee,service, orange, loging, data);
+        	 
+        	 response.setStatus(true);
+        	 response.setMessage("You have payed to orange");
+        	 return response;
+         }
+         else {
+        	 response.setStatus(false);
+        	 response.setMessage("this company not in the system ");
+         }
+         
+		 }
+		 else {
+			 response.setStatus(false);
+        	 response.setMessage("this Service not in the system ");
+		 }
+		 
+		return response;
+		
 	}
 	
 	
+	 @GetMapping("/service/{c}")
+	 public Response service(@PathVariable("c")char c){
+		 Response response = new Response();
+		 service = servicefact.chooseservice(c);
+		 
+	        if (service == null) {
+	            response.setStatus(false);
+	            response.setMessage("Service Not Found");
+	            return response;
+	        }
+	        
+	        
+	        response.setStatus(true);
+	        response.setMessage("Service is exist U can use it bro !");
+	        
+
+	        return response;
+	 }
+	 
+	 
+	 @GetMapping("transactions")
+	 public ArrayList<transaction> showTrans(){
+		 
+		 return data.getTransactions();
+	 }
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
 	
-	
+	 public static void paying(double fee,Iservice service, company c, login l, database data) {
+			transaction t;
+			t = new transaction(c, l.getCurrentuser(), fee);
+			service.paying(t);
+
+			data.addtansaction(t);
+
+		}
+	 
+	 
 	
 	
 	

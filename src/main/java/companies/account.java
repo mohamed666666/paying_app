@@ -1,4 +1,4 @@
-package paying;
+package companies;
 
 public class account {
 	private String accid;
