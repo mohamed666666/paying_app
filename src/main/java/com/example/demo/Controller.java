@@ -20,6 +20,8 @@ import Client.database;
 import Client.login;
 import Client.register;
 import Client.wallet;
+import admin.admin;
+import admin.refundrequest;
 import companies.account;
 import companies.company;
 import companies.etisalat;
@@ -46,6 +48,10 @@ public class Controller {
 	company we;
 	serviceFactory servicefact = new serviceFactory();
 	Iservice service=null;
+	
+	
+	
+	admin TheAdmin1=new admin();
 	
 	
 	
@@ -142,6 +148,10 @@ public class Controller {
 	}
 	
 	
+	@GetMapping("/ShowWallet")
+	public wallet Showwallet() {
+		return loging.getCurrentuser().getUserwallet();
+	}
 	
 	@GetMapping("/services") 
 	public String Services() {
@@ -232,12 +242,54 @@ public class Controller {
 	 
 	 
 	 
+	 @PostMapping("Refund")
+	 public Response RefundRequest(@RequestBody ObjectNode objectNode) {
+		 String transId=objectNode.get("Tid").asText();
+		 Response res=new Response();
+		 transaction t=data.getTransactionById(transId);
+		 
+		 if (t ==null) {
+			 res.setStatus(false);
+			 res.setMessage("This Transaction Doesnot Exist please try another id ");
+			 return res;
+		 }
+		 if((loging.getCurrentuser().getEmail()).equals((t.getUser().getEmail()))) {
+			 refundrequest rr=new refundrequest(loging.getCurrentuser().getEmail(),t);
+			 rr.Subscrib(TheAdmin1);
+			 rr.NotifyAll();
+			 res.setStatus(true);
+			 res.setMessage("Your request is creating and its binding now ");
+			 return res;
+		 }
+		 res.setStatus(false);
+		 res.setMessage("You traying to Get anothers Transaction Please Spicfy your trasaction Id correctly  ");
+		 return res;
+		 
+	 }
+	 
+	 @GetMapping("Requests")
+		public ArrayList<refundrequest> GetReqs(){
+			return TheAdmin1.GetReqs();
+		}
 	 
 	 
-	 
-	 
-	 
-	 
+	@GetMapping("Requests/accepting/{ReqId}")
+	public Response AdminAccept(@PathVariable("ReqId")String ReqId) {
+		double reqmony= TheAdmin1.returnMonyBack(ReqId, data);
+		Response response=new Response();
+		if (reqmony==0) {
+			response.setStatus(false);
+			response.setMessage("The request hase been declined");
+			return response;
+		}
+		
+		response.setStatus(true);
+		response.setMessage("Congrates your money is back Check Yor wallet");
+		return response;
+		
+	}
+		
+		
 	 
 	
 	 public static void paying(double fee,Iservice service, company c, login l, database data) {
