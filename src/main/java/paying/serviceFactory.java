@@ -15,7 +15,9 @@ public class serviceFactory implements IserviceFactory  {
 		if (selector=='c') {
 			return new Landlin();
 		}
-		
+		if(selector=='d' ) {
+			return new Donations();
+		}
 		return null;
 	}
 	

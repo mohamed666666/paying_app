@@ -22,6 +22,7 @@ import Client.register;
 import Client.wallet;
 import admin.admin;
 import admin.refundrequest;
+import companies.CompanyFactory;
 import companies.account;
 import companies.company;
 import companies.etisalat;
@@ -49,7 +50,7 @@ public class Controller {
 	serviceFactory servicefact = new serviceFactory();
 	Iservice service=null;
 	
-	
+	CompanyFactory compFact=new CompanyFactory();
 	
 	admin TheAdmin1=new admin();
 	
@@ -157,9 +158,9 @@ public class Controller {
 	public String Services() {
 		
 		return "a. Mobile recharge services.\n"
-				+"i. Vodafone\n" + "ii.Etisalat\n" + "iii. Orange\n"
+				+"i. Vodafone\n" + "ii.Etisalat\n" + "iii. Orange\n"+"iiii.We\n"
 		+ "b. Internet Payment services.\n"+
-		"i. Vodafone\n" + "ii.Etisalat\n" + "iii. Orange\n"
+		"i. Vodafone\n" + "ii.Etisalat\n" + "iii. Orange\n"+"iiii.We\n"
 				+ "c. Landline services\n"+
 				"i. Monthly\n" + "ii.3Months\n" ; 
 	}
@@ -171,14 +172,13 @@ public class Controller {
 		 double fee = objectNode.get("fee").asDouble();
 		 
 		 if (service!=null) {
-			 
+			 if(s=='a'||s=='b'||s=='c') {
 			 if (c.equals("i")) {
 				 paying(fee,service, voda, loging, data);
         	 
 				 response.setStatus(true);
 				 response.setMessage("You have payed to Vodafone");
-				 return response;
-         }
+				 return response;  }
         
          
          if (c.equals("ii")) {
@@ -186,8 +186,7 @@ public class Controller {
         	 
         	 response.setStatus(true);
         	 response.setMessage("You have payed to Etisalat");
-        	 return response;
-         }
+        	 return response;  }
          
          else if (c.equals("iii")) {
         	 paying(fee,service, orange, loging, data);
@@ -196,12 +195,52 @@ public class Controller {
         	 response.setMessage("You have payed to orange");
         	 return response;
          }
+         else if (c.equals("iiii")) {
+        	 paying(fee,service, we, loging, data);
+        	 
+        	 response.setStatus(true);
+        	 response.setMessage("You have payed to We");
+        	 return response;
+         }
+         
          else {
         	 response.setStatus(false);
         	 response.setMessage("this company not in the system ");
          }
          
+		 }}
+		 else {
+			 response.setStatus(false);
+        	 response.setMessage("this Service not in the system ");
 		 }
+		 
+		return response;
+		
+	}
+	
+	
+	
+	@PostMapping("/servicefact/{s}/companyfact/{c}") 
+	public Response ServiceCompanyfactory(@PathVariable("s")char s,@PathVariable("c")String c,@RequestBody ObjectNode objectNode) {
+		 service = servicefact.chooseservice(s);
+		 Response response = new Response();
+		 double fee = objectNode.get("fee").asDouble();
+		 company tempc=compFact.chooseCompany(c, data);
+		 
+		 
+		 if (service!=null) {
+			 
+			 	
+			 	
+				 paying(fee,service,tempc , loging, data);
+        	 
+				 response.setStatus(true);
+				 response.setMessage("You have payed to "+tempc.getCompid());
+				 return response; 
+				 }
+        
+         
+         
 		 else {
 			 response.setStatus(false);
         	 response.setMessage("this Service not in the system ");
